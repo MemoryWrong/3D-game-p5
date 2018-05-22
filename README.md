@@ -1,14 +1,10 @@
-# DeepNeuralNetwork
+# Genetic Algorithm
 this is demo visualise the output of neural network using p5.js\
 
 ## Implementation of Matrix Library
 
 ```
-1. Algorithm of single perceptron network
-2. DNN (to do) 
-3. RNN (to do)
-4. Multi-layer NN
-5. Matrix ( + - * )
+
 
 ```
 

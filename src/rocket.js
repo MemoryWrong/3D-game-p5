@@ -2,10 +2,12 @@
 // if the lifespan is 200 frame DNA will apply 200 vector for each animation
 class Rocket{
     constructor(){
-      this.pos = createVector(width/2, height);
-      this.vel = p5.Vector.random2D();
-      this.acc = createVector();
-  
+        this.pos = createVector(width/2, height);
+        this.vel = createVector();
+        this.acc = createVector();
+        this.lifespan =200;
+        this.dna = new DNA(this.lifespan);
+        this.count = 0;
     }
   
     applyForce(force){
@@ -14,6 +16,8 @@ class Rocket{
   
     update(){
       // this.vel.add(this.acc);
+      this.applyForce(this.dna.genes[this.count]);
+      this.count++;
       this.vel.add(this.acc);
       this.pos.add(this.vel);
       this.acc.mult(0);
