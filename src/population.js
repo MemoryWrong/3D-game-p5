@@ -14,4 +14,7 @@ class Population{
             this.rockets[i].show();
         }
     }
+
+    
+   
 }
