@@ -2,10 +2,13 @@
 // if the lifespan is 200 frame DNA will apply 200 vector for each animation
 class Rocket{
     constructor(dna){
-        this.pos = createVector(width/2, height);
+        this.pos = createVector(width/2, height-50);
         this.vel = createVector();
         this.acc = createVector();
         this.lifespan =200;
+        this.completed = false;
+        this.crashed = false;
+
         if(dna){
           this.dna = dna;
         }else{
@@ -25,11 +28,36 @@ class Rocket{
   
     update(){
       // this.vel.add(this.acc);
-      this.applyForce(this.dna.genes[this.count]);
-      this.count++;
-      this.vel.add(this.acc);
-      this.pos.add(this.vel);
-      // this.acc.mult(0);
+      var d = dist(this.pos.x, this.pos.y, width/2, 50);
+      // console.log(d)
+      // If distance less than 10 pixels, then it has reached target
+      if (d < 10) {
+        this.completed = true;
+        this.pos.x = width/2;
+        this.pos.y = 50;
+        console.error(this)
+      }
+        // Rocket hit the barrier
+      // if (this.pos.x > rx && this.pos.x < rx + rw && this.pos.y > ry && this.pos.y < ry + rh) {
+      //   this.crashed = true;
+      // }
+      // Rocket has hit left or right of window
+      if (this.pos.x > width || this.pos.x < 0) {
+        this.crashed = true;
+      }
+      // Rocket has hit top or bottom of window
+      if (this.pos.y > height || this.pos.y < 0) {
+        this.crashed = true;
+      }
+      if(!this.completed && !this.crashed){
+        this.applyForce(this.dna.genes[this.count]);
+        this.count++;
+        this.vel.add(this.acc);
+        this.pos.add(this.vel);
+        this.acc.mult(0);
+        this.vel.limit(4);
+      }
+      
       
     }
   
@@ -47,7 +75,20 @@ class Rocket{
    
 
     calFitness(target){
+      // var d = dist(this.pos.x, this.pos.y, target.x, target.y);
       var d = dist(this.pos.x, this.pos.y, width/2, 50);
-      this.fitness = 1/d;
+
+      // Maps range of fitness
+      this.fitness = map(d, 0, width, width, 0);
+      // If rocket gets to target increase fitness of rocket
+      if (this.completed) {
+        this.fitness *= 10;
+      }
+      // If rocket does not get to target decrease fitness
+      if (this.crashed) {
+        this.fitness /= 10;
+      }
+
+      // console.log(this.fitness);
     }
   }

@@ -21,7 +21,7 @@ function draw() {
   count++;
   if(count == population.rockets[0].lifespan){
     population.evaluate();
-    console.log('pool',population.matingpool);
+    // console.log('pool',population.matingpool);
     population.makeLove();
     
     population = new Population();

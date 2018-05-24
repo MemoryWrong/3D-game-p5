@@ -2,6 +2,7 @@ class Population{
     constructor(){
         this.rockets = [];
         this.popsize = 25;
+        // this.popsize = 150;
         for(let i = 0; i<this.popsize; i++){
             this.rockets[i] = new Rocket();
             // this.rockets.push(rocket);
@@ -21,12 +22,13 @@ class Population{
             let parentA_DNA = random(this.matingpool).dna;
             let parentB_DNA = random(this.matingpool).dna;
             let child_DNA = parentA_DNA.crossOver(parentB_DNA);
+            child_DNA.mutation();
             // console.log(child_DNA);
             let child = new Rocket(child_DNA);
             newRockets.push(child);
         }
         // console.log(newRockets);
-        console.log(this.rockets.length);
+        // console.log(this.rockets.length);
         this.rockets = newRockets;
         // return newRockets;
     }
@@ -40,15 +42,19 @@ class Population{
                 maxfit = this.rockets[i].fitness;
             }
         }
-        createP(maxfit);
-        this.matingpool = [];
+        console.log(maxfit);
+        
         for(let i = 0; i<this.popsize; i++){
             this.rockets[i].fitness /=maxfit;
         }
+
+        this.matingpool = [];
+        
         for(let i = 0; i<this.popsize; i++){
+            // console.log(this.rockets[i].fitness);
             let n = 100*this.rockets[i].fitness;
             for(let j = 0; j<n; j++){
-            this.matingpool.push(this.rockets[i]);
+                this.matingpool.push(this.rockets[i]);
             }
         }
 
