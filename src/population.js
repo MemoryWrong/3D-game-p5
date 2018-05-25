@@ -1,8 +1,8 @@
 class Population{
     constructor(rockets){
         this.rockets = [];
-        this.popsize = 25;
-        // this.popsize = 2;
+        this.popsize = 1500;
+        // this.popsize =5;
 
         if(rockets){
             console.log('new generation'+this.genCode)
@@ -14,6 +14,7 @@ class Population{
                 // this.rockets.push(rocket);
             }
         }
+        this.bestKid = {};
         
     }
 
@@ -29,7 +30,7 @@ class Population{
         for(var i =0; i<this.rockets.length; i++){
             let parentA_DNA = random(this.matingpool).dna;
             let parentB_DNA = random(this.matingpool).dna;
-            console.log(this.matingpool.length, parentA_DNA, parentB_DNA);
+            // console.log(this.matingpool.length, parentA_DNA, parentB_DNA);
 
             let child_DNA = parentA_DNA.crossOver(parentB_DNA);
             // child_DNA.mutation();
@@ -53,7 +54,7 @@ class Population{
             }
         }
         console.log(maxfit);
-        
+        this.bestKid = maxfit;
         for(let i = 0; i<this.popsize; i++){
             this.rockets[i].fitness /=maxfit;
         }

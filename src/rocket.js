@@ -8,7 +8,7 @@ class Rocket{
         this.lifespan =200;
         this.completed = false;
         this.crashed = false;
-
+        this.barriers = [];
         if(dna){
           this.dna = dna;
         }else{
@@ -48,6 +48,15 @@ class Rocket{
       //   this.crashed = true;
       // }
       // Rocket has hit left or right of window
+      for(let i = 0; i<this.barriers.length;i++){
+        
+        if(this.barriers[i].isCollision(this)){
+          this.crashed = true;
+          this.pos.x = this.pos.x;
+          this.pos.y = this.pos.y;
+
+        }
+      }
       if (this.pos.x > width || this.pos.x < 0) {
         this.crashed = true;
       }
@@ -72,7 +81,8 @@ class Rocket{
       translate(this.pos.x, this.pos.y);
       rotate(this.vel.heading());
       rectMode(CENTER);
-      fill(255);
+      fill(255,100);
+      noStroke();
       rect(0,0, 20,5);
       pop();
     }
@@ -87,6 +97,7 @@ class Rocket{
       // Maps range of fitness
       // this.fitness = map(d, 0, width, width, 0);
       this.fitness = map((height-this.pos.y), 0,(height-50),0,1);
+      this.fitness =  Math.pow(this.fitness,3)*1000
       // this.fitness = map((height-this.pos.y), 0, height,0,1);
       // If rocket gets to target increase fitness of rocket
       if (this.completed) {
