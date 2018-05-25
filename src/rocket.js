@@ -73,7 +73,7 @@ class Rocket{
       rotate(this.vel.heading());
       rectMode(CENTER);
       fill(255);
-      rect(0,0, 50,10);
+      rect(0,0, 20,5);
       pop();
     }
 
