@@ -35,8 +35,14 @@ class Rocket{
         this.completed = true;
         this.pos.x = width/2;
         this.pos.y = 50;
-        console.error(this)
+        // console.error(this)
       }
+
+      // if(this.pos.y == 0){
+      //   this.completed == true;
+      //   this.pos.y = 0;
+        
+      // }
         // Rocket hit the barrier
       // if (this.pos.x > rx && this.pos.x < rx + rw && this.pos.y > ry && this.pos.y < ry + rh) {
       //   this.crashed = true;
@@ -79,7 +85,9 @@ class Rocket{
       var d = dist(this.pos.x, this.pos.y, width/2, 50);
 
       // Maps range of fitness
-      this.fitness = map(d, 0, width, width, 0);
+      // this.fitness = map(d, 0, width, width, 0);
+      this.fitness = map((height-this.pos.y), 0,(height-50),0,1);
+      // this.fitness = map((height-this.pos.y), 0, height,0,1);
       // If rocket gets to target increase fitness of rocket
       if (this.completed) {
         this.fitness *= 10;

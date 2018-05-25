@@ -1,12 +1,20 @@
 class Population{
-    constructor(){
+    constructor(rockets){
         this.rockets = [];
         this.popsize = 25;
-        // this.popsize = 150;
-        for(let i = 0; i<this.popsize; i++){
-            this.rockets[i] = new Rocket();
-            // this.rockets.push(rocket);
+        // this.popsize = 2;
+
+        if(rockets){
+            console.log('new generation'+this.genCode)
+            this.rockets = rockets;
+        }else{
+            console.log('初代火影');
+            for(let i = 0; i<this.popsize; i++){
+                this.rockets[i] = new Rocket();
+                // this.rockets.push(rocket);
+            }
         }
+        
     }
 
     run(){
@@ -21,16 +29,18 @@ class Population{
         for(var i =0; i<this.rockets.length; i++){
             let parentA_DNA = random(this.matingpool).dna;
             let parentB_DNA = random(this.matingpool).dna;
+            console.log(this.matingpool.length, parentA_DNA, parentB_DNA);
+
             let child_DNA = parentA_DNA.crossOver(parentB_DNA);
-            child_DNA.mutation();
+            // child_DNA.mutation();
             // console.log(child_DNA);
             let child = new Rocket(child_DNA);
             newRockets.push(child);
         }
         // console.log(newRockets);
         // console.log(this.rockets.length);
-        this.rockets = newRockets;
-        // return newRockets;
+        // this.rockets = newRockets;
+        return newRockets;
     }
 
     evaluate(){
