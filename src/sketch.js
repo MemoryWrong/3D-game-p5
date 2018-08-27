@@ -52,7 +52,7 @@ function draw() {
     population = new Population(newGeneration);
     count = 0;
   }
-  lifep.html(count);
+  lifep.html('Life Span Frames:'+count);
   population.run();
 
   textSize(16);
@@ -62,6 +62,7 @@ function draw() {
   fill(255);
   text('sample:'+1500, 10, 50);
   fill(255);
-  text('best kid:'+population.bestKid, 10, 50);
+  // text('best kid:'+population.bestKid, 10, 50);
+  // console.log(population.bestKid)
 }
 
