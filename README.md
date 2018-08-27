@@ -1,5 +1,7 @@
 # Genetic Algorithm
-this is demo visualise the output of neural network using p5.js\
+this is demo visualise the output of neural network using p5.js
+![alt text](https://github.com/MemoryWrong/Genetic-Algorithm-Demo/blob/master/gene.PNG)
+
 
 ## Instruction
 
